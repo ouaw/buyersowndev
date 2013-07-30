@@ -1,0 +1,59 @@
+.container-fluid
+  .row-fluid
+    .span8
+      = simple_form_for @property, :html => { :class => 'form-horizontal' } do |f|
+        = f.input :description
+        - if current_user.role == 'admin'
+          = f.input :user_id
+        - else
+          - f.input :user_id, :input_html => { :value => current_user.id }, disabled: :true
+
+        = tabs do |tabs|
+          - tabs.pane 'Home' do
+            = accordion do |accordion|
+              = accordion.pane 'Basics', open: :true do
+                = f.association :neighborhood, label_method: :description, value_method: :id, include_blank: false, prompt: "Select the area"
+                = f.association :subneighborhood, label_method: :description, value_method: :id, include_blank: false, prompt: "Select the sub-area"
+              = accordion.pane 'What are the characteristics of the property that you want to sell' do
+                = f.input :property_type, collection: ['House', 'Duplex', 'Apartment/Condo']
+                = f.input :bedrooms
+                = f.input :bathrooms
+                = f.input :total_floor_area
+                = f.input :lot_size
+              = accordion.pane 'What is the listing price' do
+                = f.input :price
+          - tabs.pane 'Neighborhood' do
+            = accordion do |accordion|
+              = accordion.pane 'Which is the school catchment', open: :true do
+                = f.association :schools, label_method: :name, value_method: :id, include_blank: false, prompt: "Select schools"
+          - tabs.pane 'Exact Address' do
+            = accordion do |accordion|
+              = accordion.pane 'What is the exact address', open: :true do
+                = f.input :address_unit_number_1
+                = f.input :address_street_number_1
+                = f.input :address_street_name_1
+                = f.input :address_street_type_1
+                = f.input :address_postal_code_1
+                = f.input :address_city_1
+                = f.input :address_province_1
+          - tabs.pane 'Pictures' do
+            = accordion do |accordion|
+              = accordion.pane 'Do you have picture to upload', open: :true do
+                = f.file_field :photo
+
+
+        .form-actions
+          = f.button :submit, :class => 'btn-primary'
+          = link_to t('.cancel', :default => t("helpers.links.cancel")), 
+            properties_path, :class => 'btn'                                 
+    .span4
+      #side_bar  
+        %h3 Recent Contacts  
+        %p Contact 1 goes here
+        %p Contact 2 
+      #side_bar  
+        %h3 Advertisement
+        %p Advertisement goes here
+      #side_bar  
+        %h3 Social
+        %p Social Network links goes here

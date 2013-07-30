@@ -1,0 +1,43 @@
+- model_class = Property
+.page-header
+  %h1= t '.title', :default => model_class.model_name.human.pluralize.titleize
+
+.container-fluid
+  .row-fluid
+    .span8
+      .container-fluid
+        .row-fluid
+          .span8
+            %h2 Dashboard
+            %p Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+          .span4
+            %br
+            %br
+            = video_tag("BuyersOwn_Take_02.mp4", autoplay: :true, height: '200', width: '200')
+
+        %ul#grid
+          - @properties.each do |property|
+            .property_image_box
+              .row-fluid
+                %li=image_tag property.photo.url(:small)
+                %ul
+                  %li= link_to t('.edit', :default => t("helpers.links.edit")), edit_property_path(property), :class => 'btn btn-mini'           
+                  %li= link_to t('.edit', :default => t("helpers.links.edit")), edit_property_path(property), :class => 'btn btn-mini'           
+                  %li= link_to t('.destroy', :default => t("helpers.links.destroy")), property_path(property), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'                                                                          
+    .span4
+      %br
+      %br
+      %br
+      = link_to t('.new', :default => "Add new item"), 
+        new_property_path,                                         
+        :class => 'btn btn-primary btn-large'                            
+      #side_bar  
+        %h3 Recent Contacts  
+        %p Contact 1 goes here
+        %p Contact 2 
+      #side_bar  
+        %h3 Advertisement
+        %p Advertisement goes here
+      #side_bar  
+        %h3 Social
+        %p Social Network links goes here

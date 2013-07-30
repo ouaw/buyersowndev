@@ -1,0 +1,74 @@
+.container-fluid
+  .row-fluid
+    .span8
+      = simple_form_for @wish, :html => { :class => 'form-horizontal' } do |f|
+        = f.input :description
+        - if current_user.role == 'admin'
+          = f.input :user_id
+        - else
+          - f.input :user_id, :input_html => { :value => current_user.id }, disabled: :true
+
+        = tabs do |tabs|
+          - tabs.pane 'Home' do
+            = accordion do |accordion|
+              = accordion.pane 'Where do you like to live', open: :true do
+                = f.association :neighborhoods, label_method: :description, value_method: :id, include_blank: false, prompt: "Select the area"
+                = f.association :subneighborhoods, label_method: :description, value_method: :id, include_blank: false, prompt: "Select the sub-area"
+                = f.input :weight_neighborhood
+                = f.input :flexible_neighborhood
+              = accordion.pane 'What are the characteristics of the property that you want to live' do
+                = f.input :property_type, collection: ['House', 'Duplex', 'Apartment/Condo']
+                = f.input :weight_property_type
+                = f.input :flexible_property_type
+                = f.input :minimum_bedrooms
+                = f.input :weight_minimum_bedrooms
+                = f.input :flexible_minimum_bedrooms
+                = f.input :minimum_bathrooms
+                = f.input :weight_minimum_bathrooms
+                = f.input :flexible_minimum_bathrooms
+                = f.input :minimum_total_floor_area
+                = f.input :weight_minimum_total_floor_area
+                = f.input :flexible_minimum_total_floor_area
+                = f.input :minimum_lot_size
+                = f.input :weight_minimum_lot_size
+                = f.input :flexible_minimum_lot_size
+              = accordion.pane 'What is your price range' do
+                = f.input :maximum_price
+                = f.input :weight_maximum_price
+                = f.input :flexible_maximum_price
+          - tabs.pane 'Neighborhood' do
+            = accordion do |accordion|
+              = accordion.pane 'Which schools you would like your kid to go', open: :true do
+                = f.association :schools, label_method: :name, value_method: :id, include_blank: false, prompt: "Select schools"
+                = f.input :weight_school
+                = f.input :flexible_school
+          - tabs.pane 'Work' do
+            = accordion do |accordion|
+              = accordion.pane 'Where is your work place', open: :true do
+                = f.input :work_address_unit_number_1
+                = f.input :work_address_street_number_1
+                = f.input :work_address_street_name_1
+                = f.input :work_address_street_type_1
+                = f.input :work_address_postal_code_1
+                = f.input :max_distance_to_work_address_1
+                = f.input :work_address_preferred_transportation_method_1
+                = f.input :max_duration_to_work_1
+                = f.input :weight_work_address
+                = f.input :flexible_work_address
+
+
+        .form-actions
+          = f.button :submit, :class => 'btn-primary'
+          = link_to t('.cancel', :default => t("helpers.links.cancel")), 
+            wishes_path, :class => 'btn'                                 
+    .span4
+      #side_bar  
+        %h3 Recent Contacts  
+        %p Contact 1 goes here
+        %p Contact 2 
+      #side_bar  
+        %h3 Adverstisement
+        %p Advertisement goes here
+      #side_bar  
+        %h3 Social
+        %p Social Network links goes here

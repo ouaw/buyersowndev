@@ -1,0 +1,70 @@
+!!!
+%html
+  %head
+    %title Buyersowndev
+    = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
+    = javascript_include_tag "application", "data-turbolinks-track" => true
+    = csrf_meta_tags
+  %body
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container
+          %a.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse"}
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          %a.brand BuyersOwn
+          .nav-collapse
+            %ul.nav
+              - if user_signed_in?
+                %li= current_user.name
+                %li= link_to "Logout", destroy_user_session_path, method: :delete
+              %li= link_to "Home", root_path
+              %li= link_to "About Us", about_path
+              %li= link_to "Contact Us", contact_path
+    %p.notice= notice
+    %p.alert= alert
+    = yield
+
+/ <!-- <!DOCTYPE html>
+/ <html>
+/ <head>
+/   <title>Buyersowndev</title>
+/   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+/   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+/   <%= csrf_meta_tags %>
+/ </head>
+/ <body>
+
+/ 	<div class="navbar navbar-fixed-top">
+/ 	  <div class="navbar-inner">
+/ 	    <div class="container">
+/ 	      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+/ 	        <span class="icon-bar"></span>
+/ 	        <span class="icon-bar"></span>
+/ 	        <span class="icon-bar"></span>
+/ 	      </a>
+/ 	      <a class="brand">BuyersOwn</a>
+/ 	      <div class="nav-collapse">
+/ 	        <ul class="nav">
+/ 	        	<% if user_signed_in? %>
+/ 		        	<li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+/ 		        <% end %>
+/ 	          <li><%= link_to "Home", root_path %></li>
+/ 	          <li><%= link_to "About Us", about_path %></li>
+/ 	          <li><%= link_to "Contact Us", contact_path %></li>
+/ 	        </ul>
+/ 	      </div>
+/ 	    </div>
+/ 	  </div>
+/ 	</div>
+
+/ 	<p class="notice"><%= notice %></p>
+/ 	<p class="alert"><%= alert %></p>
+
+/ 	<%= yield %>
+
+/ </body>
+/ </html>
+

@@ -1,0 +1,56 @@
+<%= simple_form_for @wish, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :description %>
+  <%if current_user.role == 'admin' %>
+    <%= f.input :user_id %>
+  <%else%>
+    <%= f.input :user_id, :input_html => { :value => current_user.id }, disabled: :true  %>
+  <%end%>
+  <%= f.input :neighborhood %>
+  <%= f.input :sub_neighborhood %>
+  <%= f.input :property_type %>
+<!--   <%= f.input :minimum_bedrooms %>
+  <%= f.input :minimum_bathrooms %>
+  <%= f.input :minimum_total_floor_area %>
+  <%= f.input :minimum_lot_size %>
+  <%= f.input :maximum_price %>
+  <%= f.input :work_address_unit_number_1 %>
+  <%= f.input :work_address_street_number_1 %>
+  <%= f.input :work_address_street_name_1 %>
+  <%= f.input :work_address_street_type_1 %>
+  <%= f.input :work_address_postal_code_1 %>
+  <%= f.input :max_distance_to_ %>
+  <%= f.input :work_address_1 %>
+  <%= f.input :work_address_preferred_transportation_method_1 %>
+  <%= f.input :max_duration_to_work_1 %>
+  <%= f.input :work_address_unit_number_2 %>
+  <%= f.input :work_address_street_number_2 %>
+  <%= f.input :work_address_street_name_2 %>
+  <%= f.input :work_address_street_type_2 %>
+  <%= f.input :work_address_postal_code_2 %>
+  <%= f.input :work_address_2 %>
+  <%= f.input :work_address_preferred_transportation_method_2 %>
+  <%= f.input :max_duration_to_work_2 %>
+  <%= f.input :flexible_neighborhood %>
+  <%= f.input :flexible_property_type %>
+  <%= f.input :flexible_minimum_bedrooms %>
+  <%= f.input :flexible_minimum_bathrooms %>
+  <%= f.input :flexible_minimum_total_floor_area %>
+  <%= f.input :flexible_minimum_lot_size %>
+  <%= f.input :flexible_maximum_price %>
+  <%= f.input :flexible_school %>
+  <%= f.input :flexible_work_address %>
+  <%= f.input :weight_neighborhood %>
+  <%= f.input :weight_property_type %>
+  <%= f.input :weight_minimum_bedrooms %>
+  <%= f.input :weight_minimum_bathrooms %>
+  <%= f.input :weight_minimum_total_floor_area %>
+  <%= f.input :weight_minimum_lot_size %>
+  <%= f.input :weight_maximum_price %>
+  <%= f.input :weight_school %>  
+  <%= f.input :weight_work_address %>
+ -->  <div class="form-actions">
+    <%= f.button :submit, :class => 'btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                wishes_path, :class => 'btn' %>
+  </div>
+<% end %>
