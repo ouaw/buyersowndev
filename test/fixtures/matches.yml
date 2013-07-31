@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  property_id: 1
+  wish_id: 1
+  score: 1.5
+
+two:
+  property_id: 1
+  wish_id: 1
+  score: 1.5

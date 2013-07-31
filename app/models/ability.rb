@@ -12,6 +12,10 @@ class Ability
       can :create, Wish
       can :read, Property 
       can :read, Wish
+      can :read, Match
+      can :read, Neighborhood
+      can :read, Subneighborhood
+      can :read, School
       can :update, Property do |property|
         property.try(:user) == user
       end 

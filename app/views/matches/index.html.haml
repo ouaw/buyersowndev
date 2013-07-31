@@ -1,0 +1,48 @@
+- model_class = Match
+.page-header
+  %h1= t '.title', :default => model_class.model_name.human.pluralize.titleize
+
+.container-fluid
+  .row-fluid
+    .span8
+      .container-fluid
+        .row-fluid
+          %h2 Dashboard
+          .row-fluid
+            .span4 
+              =image_tag @property.photo.url(:small)
+            .span8
+              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+              %p= link_to "Edit", 
+                edit_property_path(@property), :class => 'btn btn-large'           
+
+      %br
+      %br    
+      %table.table.table-striped
+        %thead
+          %tr
+            / %th= model_class.human_attribute_name(:property_id)
+            %th= model_class.human_attribute_name(:wish_id)
+            %th= model_class.human_attribute_name(:score)
+            %th= t '.actions', :default => t("helpers.actions")
+        %tbody
+          - @matches.each do |match|
+            %tr
+              / %td= match.property_id
+              %td= match.wish_id
+              %td= match.score
+              %td
+                = link_to "Contact", 
+                  edit_wish_path(match), :class => 'btn btn-large'           
+                                                       
+    .span4
+      #side_bar  
+        %h3 Recent Contacts  
+        %p Contact 1 goes here
+        %p Contact 2 
+      #side_bar  
+        %h3 Adverstisement
+        %p Advertisement goes here
+      #side_bar  
+        %h3 Social
+        %p Social Network links goes here
